@@ -10,7 +10,7 @@ export default function Navbar() {
           href="/"
           className="text-white font-black tracking-[0.2em]"
         >
-          THE BELLS OF PAJARO
+          COYOTES AND ZOMBIES AND ICE - OH MY!
         </Link>
 
         <div className="flex gap-8 text-sm uppercase tracking-[0.2em] text-stone-200">

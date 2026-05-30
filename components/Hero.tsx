@@ -26,7 +26,7 @@ export default function Hero() {
         </h2>
 
         <p className="max-w-xl text-xl md:text-2xl text-stone-100 leading-relaxed mb-10">
-          Born to Lead, Destined to Survive
+          Life Prepared Her For This
                   </p>
 
       <div className="flex gap-6 flex-wrap">
