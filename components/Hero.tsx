@@ -48,7 +48,7 @@ export default function Hero() {
         </Link>
 
         <Link  
-          href="/archive"
+          href="/world"
           className="border border-white text-white hover:bg-white hover:text-black transition px-8 py-4 font-bold rounded-xl"
         >
           Explore The World
