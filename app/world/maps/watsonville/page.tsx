@@ -1,6 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 
-export default function WatsonvilleMapPage() {
+export default function WatsonvillePage() {
   return (
     <main className="min-h-screen bg-stone-950 text-stone-100">
 
@@ -14,63 +15,68 @@ export default function WatsonvilleMapPage() {
         </Link>
 
         <p className="uppercase tracking-[0.3em] text-orange-400 mb-4">
-          Watsonville Map
+          Atlas Map
         </p>
 
         <h1 className="text-6xl font-black mb-8">
-          City of Watsonville
+          Greater Watsonville
         </h1>
 
-        <p className="text-xl text-stone-400 max-w-4xl mb-16">
-          The heart of the story. Watsonville sits at the center of
-          the Pajaro Valley outbreak and serves as the primary setting
-          for many of Juanita's experiences.
+        <p className="text-xl text-stone-400 max-w-4xl mb-12">
+          A stylized atlas map of Watsonville, Pajaro, the agricultural
+          district, and surrounding landmarks. This map serves as the
+          geographic foundation for the world of The Bells of Pajaro.
         </p>
 
-        <div className="bg-stone-900 border border-stone-800 rounded-2xl p-16 text-center mb-16">
+        <div className="overflow-hidden rounded-3xl border border-stone-800">
 
-          <h2 className="text-3xl font-bold mb-4">
-            Watsonville Map Coming Soon
-          </h2>
-
-          <p className="text-stone-400">
-            This area will display the city map and story locations.
-          </p>
+          <Image
+            src="/images/watsonville-map.png"
+            alt="Greater Watsonville Map"
+            width={1600}
+            height={1200}
+            priority
+            className="w-full h-auto"
+            />
 
         </div>
-<div className="grid md:grid-cols-2 gap-12">
 
-  <div>
-    <h2 className="text-3xl font-bold mb-6">
-      Key Story Locations
-    </h2>
+        <div className="mt-12 grid md:grid-cols-2 gap-12">
 
-    <ul className="space-y-3 text-stone-300">
-      <li>Downtown Watsonville</li>
-      <li>Pajaro River</li>
-      <li>Strawberry Fields</li>
-      <li>Produce Cooler</li>
-      <li>Community Shelters</li>
-      <li>Local Churches</li>
-    </ul>
-  </div>
+          <div>
+            <h2 className="text-3xl font-bold mb-6">
+              Geographic Features
+            </h2>
 
-  <div>
-    <h2 className="text-3xl font-bold mb-6">
-      Future Map Layers
-    </h2>
+            <ul className="space-y-3 text-stone-300">
+              <li>Pajaro River</li>
+              <li>Monterey Bay</li>
+              <li>Santa Cruz Mountains</li>
+              <li>Foothills</li>
+              <li>Railroad Corridor</li>
+              <li>Highway 1</li>
+              <li>Highway 129</li>
+              <li>Highway 152</li>
+            </ul>
+          </div>
 
-    <ul className="space-y-3 text-stone-300">
-      <li>Character Locations</li>
-      <li>Safe Zones</li>
-      <li>Infected Activity</li>
-      <li>Road Closures</li>
-      <li>Supply Routes</li>
-      <li>Important Events</li>
-    </ul>
-  </div>
+          <div>
+            <h2 className="text-3xl font-bold mb-6">
+              Featured Areas
+            </h2>
 
-</div>
+            <ul className="space-y-3 text-stone-300">
+              <li>Downtown Watsonville</li>
+              <li>Pajaro</li>
+              <li>Agricultural District</li>
+              <li>Beach Street Corridor</li>
+              <li>Watsonville Municipal Airport</li>
+              <li>Santa Cruz County Fairgrounds</li>
+            </ul>
+          </div>
+
+        </div>
+
       </section>
 
     </main>

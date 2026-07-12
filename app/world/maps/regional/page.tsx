@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function RegionalMapPage() {
   return (
@@ -21,47 +22,56 @@ export default function RegionalMapPage() {
           Greater Monterey Bay Region
         </h1>
 
-        <div className="bg-stone-900 border border-stone-800 rounded-2xl p-16 text-center mb-16">
-
-        <h2 className="text-3xl font-bold mb-4">
-            Regional Map Coming Soon
-        </h2>
-
-        <p className="text-stone-400">
-            This area will display the interactive regional quarantine map.
+        <p className="text-xl text-stone-400 max-w-4xl mb-12">
+          A stylized regional atlas map showing Monterey Bay,
+          Watsonville, Moss Landing, Elkhorn Slough, and the
+          surrounding quarantine zone.
         </p>
 
+        <div className="overflow-hidden rounded-3xl border border-stone-800">
+
+          <Image
+            src="/images/monterey-bay-map.png"
+            alt="Greater Monterey Bay Region"
+            width={1600}
+            height={1200}
+            priority
+            className="w-full h-auto"
+          />
+
         </div>
-<div className="grid md:grid-cols-2 gap-12">
 
-  <div>
-    <h2 className="text-3xl font-bold mb-6">
-      Quarantine Boundary
-    </h2>
+        <div className="mt-12 grid md:grid-cols-2 gap-12">
 
-    <ul className="space-y-3 text-stone-300">
-      <li>North: Bonny Doon / Ben Lomond</li>
-      <li>South: Monterey / Carmel / Salinas</li>
-      <li>East: Gilroy / Morgan Hill</li>
-      <li>West: Pacific Ocean</li>
-    </ul>
-  </div>
+          <div>
+            <h2 className="text-3xl font-bold mb-6">
+              Quarantine Boundary
+            </h2>
 
-  <div>
-    <h2 className="text-3xl font-bold mb-6">
-      Key Locations
-    </h2>
+            <ul className="space-y-3 text-stone-300">
+              <li>North: Bonny Doon / Ben Lomond</li>
+              <li>South: Monterey / Carmel / Salinas</li>
+              <li>East: Santa Cruz Mountains</li>
+              <li>West: Monterey Bay</li>
+            </ul>
+          </div>
 
-    <ul className="space-y-3 text-stone-300">
-      <li>Watsonville</li>
-      <li>Pajaro Valley</li>
-      <li>Moss Landing</li>
-      <li>Monterey Bay</li>
-      <li>Elkhorn Slough</li>
-    </ul>
-  </div>
+          <div>
+            <h2 className="text-3xl font-bold mb-6">
+              Featured Areas
+            </h2>
 
-</div>
+            <ul className="space-y-3 text-stone-300">
+              <li>Watsonville</li>
+              <li>Pajaro Valley</li>
+              <li>Moss Landing</li>
+              <li>Elkhorn Slough</li>
+              <li>Monterey Bay</li>
+              <li>Santa Cruz Mountains</li>
+            </ul>
+          </div>
+
+        </div>
 
       </section>
 

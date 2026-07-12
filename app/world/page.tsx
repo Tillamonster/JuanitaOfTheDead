@@ -32,6 +32,12 @@ export default function WorldPage() {
         "The infected, environmental hazards, and human dangers.",
       href: "/world/threats",
     },
+    {
+      title: "🌱 Seed Vault",
+      description:
+        "The visual archive of concept art, character references, production sheets, and world-building resources.",
+      href: "/world/seed-vault",
+},
   ];
 
   return (
