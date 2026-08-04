@@ -1,4 +1,4 @@
-import CharacterWorkshop from "@/components/CharacterWorkshop";
+import CharacterWorkshop from "@/components/greenhouse";
 import { juanita } from "@/data/characters/juanita";
 
 export default function JuanitaPage() {

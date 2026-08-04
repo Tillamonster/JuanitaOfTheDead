@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Character } from "../data/characters/types.ts";
+
 type GreenhouseProps = {
-  character: any;
+  character: Character;
 };
 
 export default function Greenhouse({
@@ -17,8 +19,8 @@ export default function Greenhouse({
   ← Back to Characters
 </Link>
       <section className="mb-12">
-       <h1 className="text-6xl font-bold">
-          {character.name}
+       <h1 className="text-6xl font-bold text-red-600">
+            {character.name}
         </h1>
 
         <p className="mt-4 text-2xl text-red-700">
@@ -34,8 +36,8 @@ export default function Greenhouse({
 
        <div className="rounded overflow-hidden h-full">
   <Image
-    src="/images/characters/juanita/hero.png"
-    alt="Juanita"
+    src={character.heroImage}
+    alt={character.name}
     width={800}
     height={600}
     className="w-full object-cover"
@@ -51,12 +53,12 @@ export default function Greenhouse({
       </section>
 <section className="mt-12 grid md:grid-cols-2 gap-8">
 
-  {/* Design Bible */}
+  {/* Identity */}
 
   <div className="bg-stone-50 border border-stone-200 rounded-2xl p-8">
 
     <h2 className="text-3xl font-bold mb-6">
-      Design Bible
+      Identity
     </h2>
 
     <div className="grid grid-cols-2 gap-6">
@@ -65,22 +67,21 @@ export default function Greenhouse({
         <p className="text-sm uppercase tracking-wide text-stone-500">
           Age
         </p>
-        <p className="font-semibold">19</p>
+        <p className="font-semibold">{character.profile.age}</p>
       </div>
 
       <div>
         <p className="text-sm uppercase tracking-wide text-stone-500">
           Origin
         </p>
-        <p className="font-semibold">Mexico</p>
+        <p className="font-semibold">{character.profile.origin}</p>
       </div>
 
       <div>
         <p className="text-sm uppercase tracking-wide text-stone-500">
           Occupation
         </p>
-        <p className="font-semibold">
-          Farm Worker / Picker
+        <p className="font-semibold">{character.profile.occupation}
         </p>
       </div>
 
@@ -88,8 +89,7 @@ export default function Greenhouse({
         <p className="text-sm uppercase tracking-wide text-stone-500">
           Languages
         </p>
-        <p className="font-semibold">
-          Spanish, developing English
+        <p className="font-semibold">{character.profile.languages}
         </p>
       </div>
 
@@ -97,17 +97,14 @@ export default function Greenhouse({
         <p className="text-sm uppercase tracking-wide text-stone-500">
           Role
         </p>
-        <p className="font-semibold">
-          Observer • Navigator • Protector
+        <p className="font-semibold">{character.profile.role}
         </p>
       </div>
 
       <div>
-        <p className="text-sm uppercase tracking-wide text-stone-500">
-          Status
-        </p>
+        <p className="text-sm uppercase tracking-wide text-stone-500">Status</p>
         <p className="font-semibold">
-          Protagonist
+          {character.profile.status}
         </p>
       </div>
 
@@ -115,39 +112,23 @@ export default function Greenhouse({
 
   </div>
 
-  {/* Core Traits */}
+  {/* Personality */}
 
   <div className="bg-stone-50 border border-stone-200 rounded-2xl p-8">
 
     <h2 className="text-3xl font-bold mb-6">
-      Core Traits
+      Personality
     </h2>
 
     <ul className="space-y-4">
 
-      <li>
-        <strong>Observer</strong>
-        <br />
-        Sees what others miss.
-      </li>
-
-      <li>
-        <strong>Resourceful</strong>
-        <br />
-        Uses knowledge before force.
-      </li>
-
-      <li>
-        <strong>Protective</strong>
-        <br />
-        Places family and community first.
-      </li>
-
-      <li>
-        <strong>Resilient</strong>
-        <br />
-        Keeps moving despite fear and loss.
-      </li>
+     {character.personality.map((trait) => (
+  <li key={trait.title}>
+    <strong>{trait.title}</strong>
+    <br />
+    {trait.description}
+  </li>
+))}
 
     </ul>
 
@@ -167,15 +148,9 @@ export default function Greenhouse({
 
     <ul className="space-y-3">
 
-      <li>🧥 Hoodie</li>
-
-      <li>🧢 Trucker's Hat</li>
-
-      <li>🧣 Bandana</li>
-
-      <li>👖 Jeans</li>
-
-      <li>🥾 Boots</li>
+        {character.gear.map((item) => (
+    <li key={item}>{item}</li>
+  ))}
 
     </ul>
 
@@ -183,37 +158,21 @@ export default function Greenhouse({
 
   {/* Narrative Function */}
 
-  <div className="bg-stone-50 border border-stone-200 rounded-2xl p-8">
+ <div className="bg-stone-50 border border-stone-200 rounded-2xl p-8">
 
-    <h2 className="text-3xl font-bold mb-6">
-      Narrative Function
-    </h2>
+  <h2 className="text-3xl font-bold mb-6">
+    Narrative Function
+  </h2>
 
-    <div className="space-y-4">
+  <div className="space-y-4">
 
-      <p>
-        <strong>The Observer</strong>
+    {character.narrative.map((item) => (
+      <p key={item.title}>
+        <strong>{item.title}</strong>
         <br />
-        Juanita notices what others overlook.
+        {item.description}
       </p>
-
-      <p>
-        <strong>The Witness</strong>
-        <br />
-        She experiences the collapse firsthand.
-      </p>
-
-      <p>
-        <strong>The Bridge</strong>
-        <br />
-        She connects cultures, communities, and generations.
-      </p>
-
-      <p>
-        <strong>The Future</strong>
-        <br />
-        She represents what survives and what comes next.
-      </p>
+    ))}
 
     </div>
 
@@ -241,8 +200,8 @@ export default function Greenhouse({
 <div className="border border-stone-200 rounded-xl overflow-hidden bg-white">
 
   <Image
-    src="/images/characters/juanita/gallery/expression-sheet-v1.png"
-    alt="Juanita Expression Sheet"
+    src={character.gallery.expressionSheet}
+    alt={`${character.name} Expression Sheet`}
     width={1200}
     height={900}
     className="w-full h-auto"
