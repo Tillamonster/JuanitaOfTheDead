@@ -1,3 +1,4 @@
+
 export const episodes = [
   {
     id: 1,
@@ -6,6 +7,7 @@ export const episodes = [
     description: "...",
     image: "/images/episode1.png",
     banner: "/images/episode1.png",
+    pages: ["/images/episode1.png"],
   },
   {
     id: 2,
@@ -14,12 +16,15 @@ export const episodes = [
     description: "...",
     image: "/images/episode2.png",
     banner: "/images/episode2.png",
+    pages: ["/images/episode2.png"],
   },
   {
+    id: 3,
     slug: "episode-3",
     title: "Episode 3",
     description: "...",
     image: "/images/episode3.png",
     banner: "/images/episode3.png",
+    pages: ["/images/episode3.png"],
   },
-]
+];
