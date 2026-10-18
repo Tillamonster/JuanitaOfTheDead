@@ -73,10 +73,7 @@ export default async function EpisodePage({ params }: Props) {
       >
         <div className="flex flex-col items-center gap-4">
           {episode.pages.map((page, index) => (
-            <div
-              key={`${page}-${index}`}
-              className="w-full"
-            >
+            <div key={`${page}-${index}`} className="w-full">
               <Image
                 src={page}
                 alt={`${episode.title}, page ${index + 1}`}
@@ -104,12 +101,21 @@ export default async function EpisodePage({ params }: Props) {
             )}
           </div>
 
-          <Link
-            href="/episodes"
-            className="text-stone-400 hover:text-stone-200 text-center"
-          >
-            All Episodes
-          </Link>
+          <div className="flex flex-col items-center gap-2">
+            <Link
+              href="/episodes"
+              className="text-stone-400 hover:text-stone-200 text-center"
+            >
+              All Episodes
+            </Link>
+
+            <Link
+              href="/"
+              className="text-orange-400 hover:text-orange-300 text-center"
+            >
+              Home
+            </Link>
+          </div>
 
           <div className="flex-1 text-right">
             {nextEpisode && (
