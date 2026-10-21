@@ -6,7 +6,7 @@ export default function CharactersPage() {
       name: "Juanita",
       description:
         "A young immigrant farmworker whose journey becomes intertwined with the fate of Pajaro Valley.",
-      href: "/characters/juanita",
+      href: "/world/characters/juanita",
     },
     {
       name: "Hector",
@@ -18,7 +18,7 @@ export default function CharactersPage() {
       name: "Lluvia",
       description:
         "A determined young woman whose resilience helps shape the future of the group.",
-      href: "/world/characters/luvia",
+      href: "/world/characters/lluvia",
     },
   ];
 
