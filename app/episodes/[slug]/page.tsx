@@ -1,13 +1,13 @@
 
 import { episodes } from "@/data/episodes";
-import Image from "next/image";
 import Link from "next/link";
+import ComicPageViewer from "@/components/ComicPageViewer";
 
 type Props = {
   params: Promise<{
     slug: string;
   }>;
-};
+}
 
 export default async function EpisodePage({ params }: Props) {
   const { slug } = await params;
@@ -67,26 +67,17 @@ export default async function EpisodePage({ params }: Props) {
         </p>
       </header>
 
-      <section
-        className="max-w-4xl mx-auto px-4 pb-16"
-        aria-label={`${episode.title} comic pages`}
-      >
-        <div className="flex flex-col items-center gap-4">
-          {episode.pages.map((page, index) => (
-            <div key={`${page}-${index}`} className="w-full">
-              <Image
-                src={page}
-                alt={`${episode.title}, page ${index + 1}`}
-                width={1200}
-                height={1800}
-                sizes="(max-width: 768px) 100vw, 896px"
-                className="w-full h-auto"
-                priority={index === 0}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+<section
+  className="max-w-4xl mx-auto px-4 pb-16"
+  aria-label={`${episode.title} comic pages`}
+>
+  <ComicPageViewer
+    episodeTitle={episode.title}
+    pages={episode.pages}
+  />
+</section>
+
+  
 
       <nav className="max-w-5xl mx-auto px-6 py-10 border-t border-stone-800">
         <div className="flex justify-between items-center gap-4">
