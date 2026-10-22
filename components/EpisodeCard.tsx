@@ -15,7 +15,7 @@ export default function EpisodeCard({
   image,
 }: EpisodeCardProps) {
   return (
-    <div className="bg-stone-900 rounded-2xl overflow-hidden shadow-2xl border border-stone-800">
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-stone-800 bg-stone-900 shadow-2xl">
 
       <div className="relative h-64">
         <Image
@@ -26,13 +26,13 @@ export default function EpisodeCard({
         />
       </div>
 
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
 
         <h3 className="text-2xl font-bold mb-3 text-stone-100">
           {title}
         </h3>
 
-        <p className="text-stone-400 mb-6">
+        <p className="mb-6 flex-1 text-stone-400">
           {description}
         </p>
 

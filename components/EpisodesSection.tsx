@@ -6,112 +6,128 @@ import EpisodeCard from "@/components/EpisodeCard";
 import { episodes } from "@/data/episodes";
 
 export default function EpisodesSection() {
+  const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
 
-  const updateScrollButtons = useCallback(() => {
+  const [currentOffset, setCurrentOffset] = useState(0);
+  const [maxOffset, setMaxOffset] = useState(0);
+
+  const updateMeasurements = useCallback(() => {
+    const viewport = viewportRef.current;
     const track = trackRef.current;
 
-    if (!track) return;
+    if (!viewport || !track) return;
 
-    setCanScrollLeft(track.scrollLeft > 2);
-    setCanScrollRight(
-      track.scrollLeft + track.clientWidth < track.scrollWidth - 2
+    const maximum = Math.max(
+      0,
+      track.scrollWidth - viewport.clientWidth
     );
+
+    setMaxOffset(maximum);
+    setCurrentOffset((current) => Math.min(current, maximum));
   }, []);
 
   useEffect(() => {
+    const viewport = viewportRef.current;
     const track = trackRef.current;
 
-    if (!track) return;
+    if (!viewport || !track) return;
 
-    updateScrollButtons();
+    updateMeasurements();
 
-    const observer = new ResizeObserver(updateScrollButtons);
+    const observer = new ResizeObserver(updateMeasurements);
+    observer.observe(viewport);
     observer.observe(track);
 
-    window.addEventListener("resize", updateScrollButtons);
+    window.addEventListener("resize", updateMeasurements);
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("resize", updateScrollButtons);
+      window.removeEventListener("resize", updateMeasurements);
     };
-  }, [updateScrollButtons]);
+  }, [updateMeasurements]);
 
-  function scrollEpisodes(direction: -1 | 1) {
-    const track = trackRef.current;
+  function moveCarousel(direction: -1 | 1) {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
 
-    if (!track) return;
+    const distance = viewport.clientWidth * 0.85;
 
-    track.scrollBy({
-      left: direction * track.clientWidth * 0.85,
-      behavior: "smooth",
-    });
+    setCurrentOffset((current) =>
+      Math.max(
+        0,
+        Math.min(maxOffset, current + direction * distance)
+      )
+    );
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-8 py-24">
+    <section className="mx-auto w-full min-w-0 max-w-7xl px-8 py-24">
       <div className="mb-12">
-        <p className="uppercase tracking-[0.3em] text-orange-500 mb-4">
+        <p className="mb-4 uppercase tracking-[0.3em] text-orange-500">
           Graphic Novel
         </p>
 
-        <h2 className="text-5xl font-black mb-6">
+        <h2 className="mb-6 text-5xl font-black">
           Episodes
         </h2>
 
-        <p className="text-xl text-stone-400 max-w-2xl">
+        <p className="max-w-2xl text-xl text-stone-400">
           Enter the world of Pajaro Valley through illustrated episodes,
           character stories, and outbreak chronicles.
         </p>
       </div>
 
-      <div className="mb-4 flex justify-end gap-2">
-        {canScrollLeft && (
+      <div className="mb-4 flex min-h-10 w-full items-center justify-end gap-2">
+        {currentOffset > 1 && (
           <button
             type="button"
-            onClick={() => scrollEpisodes(-1)}
+            onClick={() => moveCarousel(-1)}
             aria-label="Previous episodes"
-            className="rounded-full border border-stone-700 p-3 text-orange-400 transition hover:border-orange-500 hover:bg-stone-900"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-700 text-xl text-orange-400 transition hover:border-orange-500 hover:bg-stone-900"
           >
-            <span aria-hidden="true">←</span>
+            ←
           </button>
         )}
 
-        {canScrollRight && (
+        {currentOffset < maxOffset - 1 && (
           <button
             type="button"
-            onClick={() => scrollEpisodes(1)}
+            onClick={() => moveCarousel(1)}
             aria-label="More episodes"
-            className="rounded-full border border-stone-700 p-3 text-orange-400 transition hover:border-orange-500 hover:bg-stone-900"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-700 text-xl text-orange-400 transition hover:border-orange-500 hover:bg-stone-900"
           >
-            <span aria-hidden="true">→</span>
+            →
           </button>
         )}
       </div>
 
       <div
-        ref={trackRef}
-        onScroll={updateScrollButtons}
-        role="region"
-        aria-label="Browse episodes"
-        tabIndex={0}
-        className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4"
+        ref={viewportRef}
+        className="w-full min-w-0 max-w-full overflow-hidden"
       >
-        {episodes.map((episode) => (
-          <div
-            key={episode.slug}
-            className="w-[85%] shrink-0 snap-start sm:w-[48%] lg:w-[31%]"
-          >
-            <EpisodeCard
-              slug={episode.slug}
-              title={episode.title}
-              description={episode.description}
-              image={episode.image}
-            />
-          </div>
-        ))}
+        <div
+          ref={trackRef}
+          className="flex w-max gap-6 transition-transform duration-300 ease-out"
+          style={{
+            transform: `translateX(-${currentOffset}px)`,
+          }}
+        >
+          {episodes.map((episode) => (
+            <div
+              key={episode.slug}
+              className="shrink-0"
+              style={{ flex: "0 0 22rem", width: "22rem" }}
+            >
+              <EpisodeCard
+                slug={episode.slug}
+                title={episode.title}
+                description={episode.description}
+                image={episode.image}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
